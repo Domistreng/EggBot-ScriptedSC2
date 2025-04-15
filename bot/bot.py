@@ -19,7 +19,7 @@ class CompetitiveBot(BotAI):
         This code runs once at the start of the game
         Do things here before the game starts
         """
-        print("Game started")
+        print("Game started.")
 
     async def on_step(self, iteration: int):
         """

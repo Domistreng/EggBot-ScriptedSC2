@@ -1,6 +1,9 @@
 # Publish folder
 publish/
 
+# Cheatsheet
+usefulCommands.txt
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
