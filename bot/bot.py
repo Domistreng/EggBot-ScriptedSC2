@@ -43,7 +43,6 @@ class CompetitiveBot(BotAI):
                 
         elif self.can_afford(UnitTypeId.SCV) and self.supply_workers < 16 and cc.is_idle:
             cc.train(UnitTypeId.SCV)
-            print('trainingSCV')
                 
         elif self.structures(UnitTypeId.BARRACKS).amount < 4:
             if self.can_afford(UnitTypeId.BARRACKS):
