@@ -9,6 +9,13 @@ class CompetitiveBot(BotAI):
     NAME: str = "EggBot[Scripted]"
     """This bot's name"""
 
+    PROPERTIES: dict = {
+        "Processing Build Order" : True,
+        "Currently Attacking": False,
+        "Under Attack": False,
+        "Attack Destination": -1
+    }
+
     RACE: Race = Race.Terran
     """This bot's Starcraft 2 race.
     Options are:
@@ -34,6 +41,8 @@ class CompetitiveBot(BotAI):
         
         ccs: Units = self.townhalls(UnitTypeId.COMMANDCENTER)
         cc: Unit = ccs.first
+
+        self.PROPERTIES['Attack Destination'] = self.enemy_structures.random_or(self.enemy_start_locations[0]).position
         
         #Build priority order:
         
@@ -68,9 +77,11 @@ class CompetitiveBot(BotAI):
         
         marines: Units = self.units(UnitTypeId.MARINE).idle
         if marines.amount > 30:
-            point2 = self.enemy_structures.random_or(self.enemy_start_locations[0]).position
+            self.PROPERTIES['Currently Attacking'] = True
+
+        if self.PROPERTIES['Currently Attacking'] == True:
             for marine in marines:
-                marine.attack(point2)
+                marine.attack(self.PROPERTIES['Attack Destination'])
         
         pass
 
