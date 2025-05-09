@@ -48,11 +48,15 @@ class CompetitiveBot(BotAI):
             if self.can_afford(UnitTypeId.BARRACKS):
                 await self.build(UnitTypeId.BARRACKS, near=cc.position.towards(self.game_info.map_center, 5))
                 
+        elif self.can_afford(UnitTypeId.COMMANDCENTER) and len(self.townhalls) < 2 and self.already_pending(UnitTypeId.COMMANDCENTER) < 1:
+            await self.expand_now()
+            
+                
         #Create troops
             
-        for rax in self.structures(UnitTypeId.BARRACKS).ready.idle:
-            if self.can_afford(UnitTypeId.MARINE):
-                rax.train(UnitTypeId.MARINE)
+        # for rax in self.structures(UnitTypeId.BARRACKS).ready.idle:
+        #     if self.can_afford(UnitTypeId.MARINE):
+        #         rax.train(UnitTypeId.MARINE)
                 
         #Send idle scvs to mine
                 
